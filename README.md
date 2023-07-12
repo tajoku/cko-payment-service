@@ -154,3 +154,4 @@ possible error responses.
 - Introduce message brokers such as Kafka for a more event driven architecture between services (e.g. Fraud and
   Notification)
 - Redact any sensitive data or payer information in the logs
+- Alerting and metrics for observability
