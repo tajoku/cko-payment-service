@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+  cko:
+    build:
+      context: cko
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - 127.0.0.1:3000:3000
+  
+  payment-gateway:
+    build:
+      context: payment-gateway
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - cko
+    environment:
+      - WAIT_HOSTS=cko:3000
+      - WAIT_HOSTS_TIMEOUT=300
+      - WAIT_SLEEP_INTERVAL=10
+      - WAIT_HOST_CONNECT_TIMEOUT=10
+    ports:
+      - 127.0.0.1:8080:8080
+
